@@ -55,7 +55,7 @@
 | Column        | Type      | Options     |
 | ------------- | --------- | ----------- |
 | order         | references| foreign_key: true|
-| postal_code   | sting     | null: false |
+| postal_code   | string    | null: false |
 | prefecture_id | integer   | null: false |
 | city          | string    | null: false |
 | address_name  | string    | null: false |
