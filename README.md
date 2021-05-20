@@ -4,7 +4,7 @@
 
 | Column         | Type   | Options     |
 | -------------- | ------ | ----------- |
-| email          | string | null: false |
+| email          | string | null: false, unique:true |
 | password       | string | null: false |
 | nick_name      | string | null: false |
 | last_name      | string | null: false |
@@ -22,7 +22,7 @@
 
 | Column         | Type      | Options     |
 | -------------- | --------- | ----------- |
-| item_name      | string    | null: false |
+| name           | string    | null: false |
 | description    | text      | null: false |
 | category_id    | integer   | null: false |
 | status_id      | integer   | null: false |
@@ -30,7 +30,7 @@
 | ship_from_id   | integer   | null: false |
 | days_to_ship_id| integer   | null: false |
 | selling_price  | integer   | null: false |
-| user_id        | references|             |
+| user           | references| foreign_key: true|
 
 ### Association
 
@@ -39,10 +39,10 @@
 
 ## orders テーブル
 
-| Column         | Type      | Options     |
-| -------------- | --------- | ----------- |
-| user_id        | references|             |
-| item_id        | references|             |
+| Column      | Type      | Options          |
+| ----------- | --------- | ---------------- |
+| user        | references| foreign_key: true|
+| item        | references| foreign_key: true|
 
 ### Association
 
@@ -54,7 +54,7 @@
 
 | Column        | Type      | Options     |
 | ------------- | --------- | ----------- |
-| order_id      | references|             |
+| order         | references| foreign_key: true|
 | postal_code   | sting     | null: false |
 | prefecture_id | integer   | null: false |
 | city          | string    | null: false |
