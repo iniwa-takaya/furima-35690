@@ -17,4 +17,16 @@ class Item < ApplicationRecord
   # 他のモデルとのアソシエーション
   belongs_to :user
   has_one_attached :image
+  # 投稿機能のバリデーション
+  with_options presence: true do
+    validates :image
+    validates :name
+    validates :description
+    validates :category_id
+    validates :status_id
+    validates :prefecture_id
+    validates :ship_from_id
+    validates :days_to_ship_id
+    validates :selling_price, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999}, format: { with: /\A[0-9]+\z/ }
+  end
 end
