@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :ship_from
   belongs_to :status
   # ActiveHashのバリデーション
-  with_options numericality; { other_than: 1 } do
+  with_options numericality: { other_than: 1 } do
     validates :category_id
     validates :days_to_ship_id
     validates :prefecture_id
