@@ -1,13 +1,12 @@
 FactoryBot.define do
   factory :item do
-    image { Faker::Lorem.sentence }
     name { '名前' }
     description { '説明' }
-    category_id { '2' }
-    status_id { '2' }
-    prefecture_id { '2' }
-    fee_status_id { '2' }
-    days_to_ship_id { '2' }
+    category_id { 2 }
+    status_id { 2 }
+    prefecture_id { 2 }
+    fee_status_id { 2 }
+    days_to_ship_id { 2 }
     selling_price { Faker::Number.between(from: 300, to: 9999999) }
     association :user
 
