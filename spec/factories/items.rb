@@ -7,7 +7,7 @@ FactoryBot.define do
     prefecture_id { 2 }
     fee_status_id { 2 }
     days_to_ship_id { 2 }
-    selling_price { Faker::Number.between(from: 300, to: 9999999) }
+    selling_price { Faker::Number.between(from: 300, to: 9_999_999) }
     association :user
 
     after(:build) do |item|
