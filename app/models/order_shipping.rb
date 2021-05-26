@@ -6,15 +6,13 @@ class OrderShipping
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :order_id
-    validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: "is invalid. Include hyphen(-)" }
-    validates :prefecture, numericality: { other_than: 1 } 
+    validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: "is invalid. Enter it as follows (e.g. 123-4567)" }
+    validates :prefecture_id, numericality: { other_than: 1,message: "can't be blank" } 
     validates :city
     validates :address_name
-    validates :building
-    validates :phone_number, format: { with: /\A\d{11}\z/, message: "is invalid. 11 digits or less" }
+    validates :phone_number, format: { with: /\A\d{11}\z/, message: "is too short" }, numericality: {only_integer: true, message: "is invalid. Input only number"}
   end
-
+  # データをテーブルに保存する処理
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
     Shipping.create(order_id: order.id, postal_code: postal_code, prefecture_id: prefecture_id,

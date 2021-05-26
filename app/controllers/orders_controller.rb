@@ -6,17 +6,18 @@ class OrdersController < ApplicationController
 
   def create
     @order_shipping = OrderShipping.new(order_shipping_params)
-    if @order_shipping.save
+    if @order_shipping.valid?
+      @order_shipping.save
       redirect_to root_path
     else
-      render :new
+      render :index
     end
   end
 
   private
 
   def order_shipping_params
-    params.require(:order_shipping).permit(:order_id ,:postal_code, :prefecture_id, :city, :address_name, :building, :phone_number).merge(user_id: current_user.id, item_id: @item.id)
+    params.require(:order_shipping).permit(:postal_code, :prefecture_id, :city, :address_name, :building, :phone_number).merge( user_id: current_user.id, item_id: @item.id)
   end
 
   def find_params
