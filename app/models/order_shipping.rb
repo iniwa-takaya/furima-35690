@@ -1,6 +1,6 @@
 class OrderShipping
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :address_name, :building, :phone_number
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :address_name, :building, :phone_number, :token
   
   # バリデーション
   with_options presence: true do
@@ -11,6 +11,7 @@ class OrderShipping
     validates :city
     validates :address_name
     validates :phone_number, format: { with: /\A\d{11}\z/, message: "is too short" }, numericality: {only_integer: true, message: "is invalid. Input only number"}
+    validates :token
   end
   # データをテーブルに保存する処理
   def save
