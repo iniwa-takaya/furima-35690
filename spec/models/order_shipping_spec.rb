@@ -20,7 +20,7 @@ RSpec.describe OrderShipping, type: :model do
       it 'postal_codeは、3桁の半角数字、ハイフン(-)、4桁の半角数字であれば購入できる' do
         expect(@order_shipping).to be_valid
       end
-      it 'phone_numberは、11桁で半角数字であれば購入できる' do
+      it 'phone_numberは、11桁以内で半角数字であれば購入できる' do
         expect(@order_shipping).to be_valid
       end
     end
@@ -61,8 +61,8 @@ RSpec.describe OrderShipping, type: :model do
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberが11桁より小さければ購入できない' do
-        @order_shipping.phone_number = 1_234_567_890
+      it 'phone_numberが11桁より大きければ購入できない' do
+        @order_shipping.phone_number = 1_234_567_890_12
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include('Phone number is too short')
       end
@@ -85,6 +85,16 @@ RSpec.describe OrderShipping, type: :model do
         @order_shipping.token = nil
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが存在しない場合購入できない' do
+        @order_shipping.user_id = nil
+        @order_shipping.valid?
+        expect(@order_shipping.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが存在しない場合購入できない' do
+        @order_shipping.item_id = nil
+        @order_shipping.valid?
+        expect(@order_shipping.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
