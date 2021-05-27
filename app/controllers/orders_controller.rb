@@ -1,5 +1,9 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: %i[index create]
   before_action :find_params, only: %i[index create]
+  before_action :check_user, only: %i[index create]
+  before_action :check_sold, only: %i[index create]
+
   def index
     @order_shipping = OrderShipping.new
   end
@@ -34,5 +38,13 @@ class OrdersController < ApplicationController
       card: order_shipping_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def check_user
+    redirect_to root_path if current_user == @item.user
+  end
+
+  def check_sold
+    redirect_to root_path if @item.order.present?
   end
 end
