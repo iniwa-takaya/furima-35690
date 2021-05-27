@@ -22,20 +22,19 @@
         <%= @item.fee_status.name %>
       </span>
     </div>
-    <% if user_signed_in? %>
+    <%# ボタンの表示の有無 サインインしており、商品が存在する %>
+    <% if user_signed_in? && @item.order.blank? %>
+      <%# ボタンの種類 %>
+      <%# 出品者本人 %>
       <% if current_user.id == @item.user.id %>
-        <% unless @item.order.present? %>
-          <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-          <p class="or-text">or</p>
-          <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
-        <% end %>
+        <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+        <p class="or-text">or</p>
+        <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
+      <%# 出品者以外 %>
       <% else %>
-        <% unless @item.order.present? %>
-          <%= link_to "購入画面に進む", item_orders_path(@item.id) ,class:"item-red-btn"%>
-        <% end %>
+        <%= link_to "購入画面に進む", item_orders_path(@item.id) ,class:"item-red-btn"%>
       <% end %>
     <% end %>
-    
 
     <div class="item-explain-box">
       <span><%= @item.description %></span>
