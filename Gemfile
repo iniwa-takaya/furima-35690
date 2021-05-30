@@ -48,7 +48,6 @@ group :development do
   gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  # Capistrano関係のGem
   gem 'capistrano'
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
