@@ -7,12 +7,12 @@ class OrderShipping
     validates :user_id
     validates :item_id
     validates :postal_code,
-              format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
-    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+              format: { with: /\A\d{3}-\d{4}\z/, message: 'が誤っています 例）123-4567' }
+    validates :prefecture_id, numericality: { other_than: 1, message: "を選択してください" }
     validates :city
     validates :address_name
-    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is too short' },
-                             numericality: { only_integer: true, message: 'is invalid. Input only number' }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'は10桁、11桁のみです' },
+                             numericality: { only_integer: true, message: 'は半角数字で入力してください' }
     validates :token
   end
   # データをテーブルに保存する処理
