@@ -17,6 +17,7 @@
 
 - has_many :items
 - has_many :orders
+- has_many :sns_credentials
 
 ## items テーブル
 
@@ -65,3 +66,16 @@
 ### Association
 
 - belongs_to :order
+
+<!-- SNSアカウント利用機能の追加実装 -->
+## sns_credentials テーブル
+
+| Column      | Type      | Options          |
+| ----------- | --------- | ---------------- |
+| user        | references| foreign_key: true|
+| provider    | string    |                  |
+| uid         | string    |                  |
+
+### Association
+
+- belongs_to :user
